@@ -1,5 +1,4 @@
 
-
 FROM node:alpine As development
 
 WORKDIR /usr/src/app
@@ -10,7 +9,7 @@ RUN npm install --force
 
 COPY . .
 
-RUN npm run build
+RUN npm run build billing
 
 FROM node:alpine as production
 
@@ -27,4 +26,4 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/orders/main"]
+CMD ["node", "dist/apps/billing/main"]

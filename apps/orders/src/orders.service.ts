@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderRequest } from './dto/createOrderRequest.dto';
+import { OrdersRepository } from './orders.repository';
 
 @Injectable()
 export class OrdersService {
-  createOrder(request: CreateOrderRequest) {
-    throw new Error('Method not implemented.');
+
+  constructor(private readonly ordersRepository: OrdersRepository) {}
+  
+  async createOrder(request: CreateOrderRequest) {
+    return this.ordersRepository.create(request)  
+  }
+
+  async getOrders() {
+    return this.ordersRepository.find({})
   }
 }
